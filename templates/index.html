@@ -42,6 +42,7 @@
                     </div>
                      <form class="navbar-form center-block" method="post" onsubmit="operate()">{% csrf_token %}
                          <legend class="text-info">Ip地址列表输入</legend>
+                         <!-- required="required" 值段不能为空-->
                          <input type="text" class="form-control" placeholder="x.x.x.x" name="ipinput" required="required" >
                          <button type="submit" class="btn">提交</button>
                     </form>

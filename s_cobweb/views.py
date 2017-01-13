@@ -21,7 +21,7 @@ def index(request):
                 host_list = [h for h in host_list if h and h.strip()]
                 ansible_collect.main(host_list=host_list)
             else:
-                print hostlist
+                pass
     return render(request, 'download.html', {
                 'status': 200
             })
