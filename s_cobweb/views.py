@@ -1,9 +1,8 @@
 # _*_coding:utf-8_*_
-from django.shortcuts import render
-
 # Create your views here.
 
 import os
+import six
 from django.shortcuts import render
 from ansible_api import ansible_collect
 from django.core.servers.basehttp import FileWrapper
@@ -15,10 +14,14 @@ def index(request):
         return render(request, 'index.html')
     else:
         # 获取到 post 过来的数据
-        hostlist = request.POST.get('ipinput', '')
-    hostlist = hostlist.split(',')
-    ansible_collect.main(host_list=hostlist)
-
+        hostlist = request.POST.get('ipinput')
+        if isinstance(hostlist, six.string_types):
+            if "," in hostlist:
+                host_list = hostlist.split(",")
+                host_list = [h for h in host_list if h and h.strip()]
+                ansible_collect.main(host_list=host_list)
+            else:
+                print hostlist
     return render(request, 'download.html', {
                 'status': 200
             })

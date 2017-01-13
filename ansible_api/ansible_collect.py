@@ -7,6 +7,7 @@ import xlsxwriter
 def base_info(host):
     get_resluts = MyRunner().Order_Run(host_list=host,
                                        module_name='setup', module_args='')
+
     # 定义返回结果集
     resluts = {}
 
