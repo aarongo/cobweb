@@ -18,5 +18,6 @@ from s_cobweb import views as small_cobweb
 
 urlpatterns = [
     url(r'^$', small_cobweb.index),
+    url(r'^download/',small_cobweb.downloader, name='download'),
     url(r'^admin/', include(admin.site.urls)),
 ]

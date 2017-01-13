@@ -1,11 +1,74 @@
 <!DOCTYPE html>
+<!-- saved from url=(0049)http://v4-alpha.getbootstrap.com/examples/cover/# -->
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Test</title>
-</head>
-<body>
-<h1>Small Cobweb</h1>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="http://v4-alpha.getbootstrap.com/favicon.ico">
+
+    <title>Cobweb</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/static/css/cover.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="site-wrapper">
+
+      <div class="site-wrapper-inner">
+
+        <div class="cover-container">
+
+          <div class="masthead clearfix">
+            <div class="inner">
+              <h3 class="center-block">CobWeb</h3>
+            </div>
+          </div>
+          <div class="inner">
+            <div class="row-fluid">
+                <div class="span12">
+                    <div class="alert alert-info center-block">
+                         <button type="button" class="close" data-dismiss="alert">×</button>
+                        <h4>
+                            提示!
+                        </h4> <strong>警告!</strong> 请正确输入IP地址例如：172.31.1.250,172.31.1.252,172.31.0.253
+                    </div>
+                     <form class="navbar-form center-block" method="post" onsubmit="operate()">{% csrf_token %}
+                         <legend class="text-info">Ip地址列表输入</legend>
+                         <input type="text" class="form-control" placeholder="x.x.x.x" name="ipinput" >
+                         <button type="submit" class="btn">提交</button>
+                    </form>
+                    <div id="showflag" style="display:none;">获取信息中请稍后。。。</div>
+                </div>
+            </div>
+          </div>
+          <div class="mastfoot">
+            <div class="inner">
+              <p>说明<a href="http://confluence.km.co-mall/pages/viewpage.action?pageId=8159938">Confluence</a>, by <a href="http://confluence.km.co-mall/pages/viewpage.action?pageId=8159938">@Edward</a>评论.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/static/js/jquery.min.js"> </script>
+    <script>window.jQuery || document.write('<script src="/static/js/jquery.min.js"><\/script>')</script>
+    <script src="/static/js/tether.min.js" ></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script language="javascript">
+        function operate(){
+            $("#showflag").show();
+        }
+    </script>
 </body>
 </html>
