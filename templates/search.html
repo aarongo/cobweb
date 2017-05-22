@@ -1,0 +1,82 @@
+
+{% extends 'index.html' %}
+
+{% block title %}查询{%  endblock %}
+
+
+{% block middlepart %}
+    <div class="container">
+        <div id="toolbar">
+            <select class="form-control">
+                <option value="">导出基本</option>
+                <option value="all">导出所有</option>
+                <option value="selected">导出选择部分</option>
+            </select>
+        </div>
+        <button type="button" class="btn btn-primary btn-lg " id="load" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> 更新中...">更新</button>
+        <table id="table"
+               data-click-to-select="true"
+               data-search="true"
+               data-show-toggle="true"
+               data-show-columns="true"
+               data-toggle="table"
+               data-toolbar="#toolbar"
+               data-height="500"
+               data-url="/static/json/data.json"
+               data-show-export="true"
+               >
+            <thead>
+            <tr>
+                <th data-field="state" data-checkbox="true"></th>
+                <th data-field="address">IP地址</th>
+                <th data-field="name">主机名</th>
+                <th data-field="disk_total">硬盘大小(GB)</th>
+                <th data-field="cpu_total">CPU个数</th>
+                <th data-field="mem_total">内存大小(MB)</th>
+                <th data-field="server_type">服务器型号</th>
+                <th data-field="swap_total">虚拟内存大小(MB)</th>
+                <th data-field="os_type">操作系统类型</th>
+                <th data-field="os_kernel">内核版本</th>
+                <th data-field="cpu_type"> CPU型号</th>
+                <th data-field="group_name">主机组</th>
+            </tr>
+            </thead>
+        </table>
+    </div>
+    <script src="/static/js/jquery.min.js" ></script>
+    <script src="/static/js/bootstrap-table.js"></script>
+    <!--添加导出数据的按钮-->
+    <script src="/static/js/bootstrap-table-export.js"></script>
+    <!--添加导出数据-->
+    <script src="/static/js/tableExport.min.js"></script>
+<script>
+    var table1 = $('#table'),
+        button1 = $('#load');
+    $(function () {
+        button1.on('click', function() {
+            var $this = $(this);
+            $this.button('loading');
+            $.ajax({
+               url: '/return_data',
+               success: function() {
+                   table1.bootstrapTable('refresh');
+                   $this.button('reset');
+               },
+               error: function(e) {
+                   console.log(e.responseText);
+               }
+            });
+
+        });
+    });
+    $(function () {
+        $('#toolbar').find('select').change(function () {
+            table1.bootstrapTable('destroy').bootstrapTable({
+                exportDataType: $(this).val()
+            });
+        });
+    })
+</script>
+
+
+{% endblock %}

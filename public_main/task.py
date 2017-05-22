@@ -2,6 +2,7 @@
 import os
 import sys
 import json
+import logger
 from collections import namedtuple
 
 from ansible.parsing.dataloader import DataLoader
@@ -38,8 +39,8 @@ class ResultCallback(CallbackBase):
 
 class MyRunner(object):
 
-    # 定义运行 playbooks传入主机列表 和 playbooks路径列表
-    def run_playbooks(self, host_list, playbook_path):
+    # 定义运行 playbooks传入主机列表 和 playbooks路径列表 groupname
+    def run_playbooks(self, host_list, playbook_path, extra_vars):
         # 管理变量的类,包括主机,组,扩展等变量
         variable_manager = VariableManager()
         # 用来加载解析yaml文件或JSON内容,并且支持vault的解密
@@ -50,7 +51,7 @@ class MyRunner(object):
             host_list=host_list)
 
         if not os.path.exists(playbook_path):
-            print '[INFO] The playbook does not exist'
+            logger.error('ymal file path:%s' % playbook_path)
             sys.exit()
         # playbooks 运行时的变量相当于本地的 ansible.cfg 文件
         Options = namedtuple('Options', ['listtags', 'listtasks', 'listhosts',
@@ -70,7 +71,7 @@ class MyRunner(object):
 
         # This can accomodate various other command line arguments.`
         # 运行 playbooks 时的额外参数
-        # variable_manager.extra_vars = {'hosts': 'mywebserver'}
+        variable_manager.extra_vars = extra_vars
         # 可以使用密码进行连接
         passwords = {}
 
@@ -78,7 +79,6 @@ class MyRunner(object):
         pbex = PlaybookExecutor(playbooks=[playbook_path], inventory=inventory,
                                 variable_manager=variable_manager, loader=loader,
                                 options=options, passwords=passwords)
-
         results = pbex.run()
         return results
 

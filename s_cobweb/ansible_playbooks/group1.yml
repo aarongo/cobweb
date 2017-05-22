@@ -1,0 +1,6 @@
+---
+# 需要配合本地 ansible.cfg使用
+- hosts: "{{ hosts }}"
+  # gather_facts: no
+  roles:
+    - role: redis

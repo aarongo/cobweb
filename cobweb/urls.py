@@ -12,12 +12,25 @@ Class-based views
 Including another URLconf
     1. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
+
+
 from django.conf.urls import include, url
 from django.contrib import admin
-from s_cobweb import views as small_cobweb
 
 urlpatterns = [
-    url(r'^$', small_cobweb.index, name='index'),
-    url(r'^download/', small_cobweb.downloader, name='download'),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'', include('s_cobweb.urls')),
+
 ]
+
+
+# urlpatterns = [
+#     url(r'^$', small_cobweb.index, name='index'),
+#     url(r'^download/', small_cobweb.downloader, name='download'),
+#     url(r'^admin/', include(admin.site.urls)),
+#     url(r'^search/', small_cobweb.search),
+#     url(r'^inset/',small_cobweb.inset,name='insert_data'),
+#     url(r'^insert_bash/',small_cobweb.insert_bash,name='insert_bash'),
+#     url(r'^author_login/', small_cobweb.author_login, name='login'),
+#
+# ]

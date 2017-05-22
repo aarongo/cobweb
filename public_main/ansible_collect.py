@@ -84,7 +84,3 @@ def main(host_list):
     #              '172.31.10.100', '172.31.1.252', '172.31.1.250']
     # run convent execl
     covent_excel(base_info(host=host_list))
-
-
-if __name__ == '__main__':
-    main()

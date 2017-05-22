@@ -1,0 +1,960 @@
+{
+    "plays": [
+        {
+            "play": {
+                "id": "b601d2d3-7fe5-4af6-8c51-a8f345f71446", 
+                "name": "group1"
+            }, 
+            "tasks": [
+                {
+                    "hosts": {
+                        "172.31.4.123": {
+                            "_ansible_no_log": false, 
+                            "_ansible_parsed": true, 
+                            "_ansible_verbose_override": true, 
+                            "ansible_facts": {
+                                "ansible_all_ipv4_addresses": [
+                                    "172.31.4.123"
+                                ], 
+                                "ansible_all_ipv6_addresses": [
+                                    "fe80::20c:29ff:fea0:a272"
+                                ], 
+                                "ansible_architecture": "x86_64", 
+                                "ansible_bios_date": "07/30/2013", 
+                                "ansible_bios_version": "6.00", 
+                                "ansible_cmdline": {
+                                    "BOOT_IMAGE": "/vmlinuz-3.10.0-514.10.2.el7.x86_64", 
+                                    "LANG": "en_US.UTF-8", 
+                                    "crashkernel": "auto", 
+                                    "quiet": true, 
+                                    "rd.lvm.lv": "centos_ansible-clients-node4/swap", 
+                                    "rhgb": true, 
+                                    "ro": true, 
+                                    "root": "/dev/mapper/centos_ansible--clients--node4-root"
+                                }, 
+                                "ansible_date_time": {
+                                    "date": "2017-05-06", 
+                                    "day": "06", 
+                                    "epoch": "1494064536", 
+                                    "hour": "05", 
+                                    "iso8601": "2017-05-06T09:55:36Z", 
+                                    "iso8601_basic": "20170506T055536001929", 
+                                    "iso8601_basic_short": "20170506T055536", 
+                                    "iso8601_micro": "2017-05-06T09:55:36.002030Z", 
+                                    "minute": "55", 
+                                    "month": "05", 
+                                    "second": "36", 
+                                    "time": "05:55:36", 
+                                    "tz": "EDT", 
+                                    "tz_offset": "-0400", 
+                                    "weekday": "Saturday", 
+                                    "weekday_number": "6", 
+                                    "weeknumber": "18", 
+                                    "year": "2017"
+                                }, 
+                                "ansible_default_ipv4": {
+                                    "address": "172.31.4.123", 
+                                    "alias": "ens192", 
+                                    "broadcast": "172.31.7.255", 
+                                    "gateway": "172.31.0.1", 
+                                    "interface": "ens192", 
+                                    "macaddress": "00:0c:29:a0:a2:72", 
+                                    "mtu": 1500, 
+                                    "netmask": "255.255.248.0", 
+                                    "network": "172.31.0.0", 
+                                    "type": "ether"
+                                }, 
+                                "ansible_default_ipv6": {}, 
+                                "ansible_devices": {
+                                    "fd0": {
+                                        "holders": [], 
+                                        "host": "", 
+                                        "model": null, 
+                                        "partitions": {}, 
+                                        "removable": "1", 
+                                        "rotational": "1", 
+                                        "sas_address": null, 
+                                        "sas_device_handle": null, 
+                                        "scheduler_mode": "deadline", 
+                                        "sectors": "8", 
+                                        "sectorsize": "512", 
+                                        "size": "4.00 KB", 
+                                        "support_discard": "0", 
+                                        "vendor": null
+                                    }, 
+                                    "sda": {
+                                        "holders": [], 
+                                        "host": "", 
+                                        "model": "Virtual disk", 
+                                        "partitions": {
+                                            "sda1": {
+                                                "holders": [], 
+                                                "sectors": "1024000", 
+                                                "sectorsize": 512, 
+                                                "size": "500.00 MB", 
+                                                "start": "2048", 
+                                                "uuid": "9c3bcb8c-42d1-41ab-88b8-463b7a2ca912"
+                                            }, 
+                                            "sda2": {
+                                                "holders": [
+                                                    "centos_ansible--clients--node4-root", 
+                                                    "centos_ansible--clients--node4-swap", 
+                                                    "centos_ansible--clients--node4-home"
+                                                ], 
+                                                "sectors": "208689152", 
+                                                "sectorsize": 512, 
+                                                "size": "99.51 GB", 
+                                                "start": "1026048", 
+                                                "uuid": null
+                                            }
+                                        }, 
+                                        "removable": "0", 
+                                        "rotational": "1", 
+                                        "sas_address": null, 
+                                        "sas_device_handle": null, 
+                                        "scheduler_mode": "deadline", 
+                                        "sectors": "209715200", 
+                                        "sectorsize": "512", 
+                                        "size": "100.00 GB", 
+                                        "support_discard": "0", 
+                                        "vendor": "VMware"
+                                    }, 
+                                    "sr0": {
+                                        "holders": [], 
+                                        "host": "", 
+                                        "model": "VMware IDE CDR10", 
+                                        "partitions": {}, 
+                                        "removable": "1", 
+                                        "rotational": "1", 
+                                        "sas_address": null, 
+                                        "sas_device_handle": null, 
+                                        "scheduler_mode": "cfq", 
+                                        "sectors": "1234944", 
+                                        "sectorsize": "2048", 
+                                        "size": "2.36 GB", 
+                                        "support_discard": "0", 
+                                        "vendor": "NECVMWar"
+                                    }
+                                }, 
+                                "ansible_distribution": "CentOS", 
+                                "ansible_distribution_major_version": "7", 
+                                "ansible_distribution_release": "Core", 
+                                "ansible_distribution_version": "7.3.1611", 
+                                "ansible_dns": {
+                                    "nameservers": [
+                                        "114.114.114.114"
+                                    ], 
+                                    "search": [
+                                        "8.8.8.8"
+                                    ]
+                                }, 
+                                "ansible_domain": "", 
+                                "ansible_ens192": {
+                                    "active": true, 
+                                    "device": "ens192", 
+                                    "features": {
+                                        "busy_poll": "off [fixed]", 
+                                        "fcoe_mtu": "off [fixed]", 
+                                        "generic_receive_offload": "on", 
+                                        "generic_segmentation_offload": "on", 
+                                        "highdma": "on", 
+                                        "hw_tc_offload": "off [fixed]", 
+                                        "l2_fwd_offload": "off [fixed]", 
+                                        "large_receive_offload": "on", 
+                                        "loopback": "off [fixed]", 
+                                        "netns_local": "off [fixed]", 
+                                        "ntuple_filters": "off [fixed]", 
+                                        "receive_hashing": "on", 
+                                        "rx_all": "off [fixed]", 
+                                        "rx_checksumming": "on", 
+                                        "rx_fcs": "off [fixed]", 
+                                        "rx_vlan_filter": "on [fixed]", 
+                                        "rx_vlan_offload": "on", 
+                                        "rx_vlan_stag_filter": "off [fixed]", 
+                                        "rx_vlan_stag_hw_parse": "off [fixed]", 
+                                        "scatter_gather": "on", 
+                                        "tcp_segmentation_offload": "on", 
+                                        "tx_checksum_fcoe_crc": "off [fixed]", 
+                                        "tx_checksum_ip_generic": "on", 
+                                        "tx_checksum_ipv4": "off [fixed]", 
+                                        "tx_checksum_ipv6": "off [fixed]", 
+                                        "tx_checksum_sctp": "off [fixed]", 
+                                        "tx_checksumming": "on", 
+                                        "tx_fcoe_segmentation": "off [fixed]", 
+                                        "tx_gre_segmentation": "off [fixed]", 
+                                        "tx_gso_robust": "off [fixed]", 
+                                        "tx_ipip_segmentation": "off [fixed]", 
+                                        "tx_lockless": "off [fixed]", 
+                                        "tx_mpls_segmentation": "off [fixed]", 
+                                        "tx_nocache_copy": "off", 
+                                        "tx_scatter_gather": "on", 
+                                        "tx_scatter_gather_fraglist": "off [fixed]", 
+                                        "tx_sctp_segmentation": "off [fixed]", 
+                                        "tx_sit_segmentation": "off [fixed]", 
+                                        "tx_tcp6_segmentation": "on", 
+                                        "tx_tcp_ecn_segmentation": "off [fixed]", 
+                                        "tx_tcp_segmentation": "on", 
+                                        "tx_udp_tnl_segmentation": "off [fixed]", 
+                                        "tx_vlan_offload": "on", 
+                                        "tx_vlan_stag_hw_insert": "off [fixed]", 
+                                        "udp_fragmentation_offload": "off [fixed]", 
+                                        "vlan_challenged": "off [fixed]"
+                                    }, 
+                                    "ipv4": {
+                                        "address": "172.31.4.123", 
+                                        "broadcast": "172.31.7.255", 
+                                        "netmask": "255.255.248.0", 
+                                        "network": "172.31.0.0"
+                                    }, 
+                                    "ipv6": [
+                                        {
+                                            "address": "fe80::20c:29ff:fea0:a272", 
+                                            "prefix": "64", 
+                                            "scope": "link"
+                                        }
+                                    ], 
+                                    "macaddress": "00:0c:29:a0:a2:72", 
+                                    "module": "vmxnet3", 
+                                    "mtu": 1500, 
+                                    "pciid": "0000:0b:00.0", 
+                                    "promisc": false, 
+                                    "speed": 10000, 
+                                    "type": "ether"
+                                }, 
+                                "ansible_env": {
+                                    "HOME": "/root", 
+                                    "LANG": "en_US.UTF-8", 
+                                    "LC_CTYPE": "zh_CN.UTF-8", 
+                                    "LESSOPEN": "||/usr/bin/lesspipe.sh %s", 
+                                    "LOGNAME": "root", 
+                                    "LS_COLORS": "", 
+                                    "MAIL": "/var/mail/root", 
+                                    "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin", 
+                                    "PWD": "/root", 
+                                    "SHELL": "/bin/bash", 
+                                    "SHLVL": "2", 
+                                    "SSH_CLIENT": "10.90.30.242 52842 22", 
+                                    "SSH_CONNECTION": "10.90.30.242 52842 172.31.4.123 22", 
+                                    "SSH_TTY": "/dev/pts/0", 
+                                    "USER": "root", 
+                                    "XDG_RUNTIME_DIR": "/run/user/0", 
+                                    "XDG_SESSION_ID": "59268", 
+                                    "_": "/usr/bin/python"
+                                }, 
+                                "ansible_fips": false, 
+                                "ansible_form_factor": "Other", 
+                                "ansible_fqdn": "ansible-clients-node4", 
+                                "ansible_gather_subset": [
+                                    "hardware", 
+                                    "network", 
+                                    "virtual"
+                                ], 
+                                "ansible_hostname": "ansible-clients-node4", 
+                                "ansible_interfaces": [
+                                    "lo", 
+                                    "ens192"
+                                ], 
+                                "ansible_kernel": "3.10.0-514.10.2.el7.x86_64", 
+                                "ansible_lo": {
+                                    "active": true, 
+                                    "device": "lo", 
+                                    "features": {
+                                        "busy_poll": "off [fixed]", 
+                                        "fcoe_mtu": "off [fixed]", 
+                                        "generic_receive_offload": "on", 
+                                        "generic_segmentation_offload": "on", 
+                                        "highdma": "on [fixed]", 
+                                        "hw_tc_offload": "off [fixed]", 
+                                        "l2_fwd_offload": "off [fixed]", 
+                                        "large_receive_offload": "off [fixed]", 
+                                        "loopback": "on [fixed]", 
+                                        "netns_local": "on [fixed]", 
+                                        "ntuple_filters": "off [fixed]", 
+                                        "receive_hashing": "off [fixed]", 
+                                        "rx_all": "off [fixed]", 
+                                        "rx_checksumming": "on [fixed]", 
+                                        "rx_fcs": "off [fixed]", 
+                                        "rx_vlan_filter": "off [fixed]", 
+                                        "rx_vlan_offload": "off [fixed]", 
+                                        "rx_vlan_stag_filter": "off [fixed]", 
+                                        "rx_vlan_stag_hw_parse": "off [fixed]", 
+                                        "scatter_gather": "on", 
+                                        "tcp_segmentation_offload": "on", 
+                                        "tx_checksum_fcoe_crc": "off [fixed]", 
+                                        "tx_checksum_ip_generic": "on [fixed]", 
+                                        "tx_checksum_ipv4": "off [fixed]", 
+                                        "tx_checksum_ipv6": "off [fixed]", 
+                                        "tx_checksum_sctp": "on [fixed]", 
+                                        "tx_checksumming": "on", 
+                                        "tx_fcoe_segmentation": "off [fixed]", 
+                                        "tx_gre_segmentation": "off [fixed]", 
+                                        "tx_gso_robust": "off [fixed]", 
+                                        "tx_ipip_segmentation": "off [fixed]", 
+                                        "tx_lockless": "on [fixed]", 
+                                        "tx_mpls_segmentation": "off [fixed]", 
+                                        "tx_nocache_copy": "off [fixed]", 
+                                        "tx_scatter_gather": "on [fixed]", 
+                                        "tx_scatter_gather_fraglist": "on [fixed]", 
+                                        "tx_sctp_segmentation": "on", 
+                                        "tx_sit_segmentation": "off [fixed]", 
+                                        "tx_tcp6_segmentation": "on", 
+                                        "tx_tcp_ecn_segmentation": "on", 
+                                        "tx_tcp_segmentation": "on", 
+                                        "tx_udp_tnl_segmentation": "off [fixed]", 
+                                        "tx_vlan_offload": "off [fixed]", 
+                                        "tx_vlan_stag_hw_insert": "off [fixed]", 
+                                        "udp_fragmentation_offload": "on", 
+                                        "vlan_challenged": "on [fixed]"
+                                    }, 
+                                    "ipv4": {
+                                        "address": "127.0.0.1", 
+                                        "broadcast": "host", 
+                                        "netmask": "255.0.0.0", 
+                                        "network": "127.0.0.0"
+                                    }, 
+                                    "ipv6": [
+                                        {
+                                            "address": "::1", 
+                                            "prefix": "128", 
+                                            "scope": "host"
+                                        }
+                                    ], 
+                                    "mtu": 65536, 
+                                    "promisc": false, 
+                                    "type": "loopback"
+                                }, 
+                                "ansible_lvm": {
+                                    "lvs": {
+                                        "home": {
+                                            "size_g": "45.57", 
+                                            "vg": "centos_ansible-clients-node4"
+                                        }, 
+                                        "root": {
+                                            "size_g": "50.00", 
+                                            "vg": "centos_ansible-clients-node4"
+                                        }, 
+                                        "swap": {
+                                            "size_g": "3.88", 
+                                            "vg": "centos_ansible-clients-node4"
+                                        }
+                                    }, 
+                                    "vgs": {
+                                        "centos_ansible-clients-node4": {
+                                            "free_g": "0.06", 
+                                            "num_lvs": "3", 
+                                            "num_pvs": "1", 
+                                            "size_g": "99.51"
+                                        }
+                                    }
+                                }, 
+                                "ansible_machine": "x86_64", 
+                                "ansible_machine_id": "db50c3598f4a436d893a76a2f4631301", 
+                                "ansible_memfree_mb": 1434, 
+                                "ansible_memory_mb": {
+                                    "nocache": {
+                                        "free": 3243, 
+                                        "used": 548
+                                    }, 
+                                    "real": {
+                                        "free": 1434, 
+                                        "total": 3791, 
+                                        "used": 2357
+                                    }, 
+                                    "swap": {
+                                        "cached": 0, 
+                                        "free": 3967, 
+                                        "total": 3967, 
+                                        "used": 0
+                                    }
+                                }, 
+                                "ansible_memtotal_mb": 3791, 
+                                "ansible_mounts": [
+                                    {
+                                        "device": "/dev/mapper/centos_ansible--clients--node4-root", 
+                                        "fstype": "xfs", 
+                                        "mount": "/", 
+                                        "options": "rw,relatime,attr2,inode64,noquota", 
+                                        "size_available": 50042785792, 
+                                        "size_total": 53660876800, 
+                                        "uuid": "66faadfd-63e7-43ef-b0dd-4e0c118477a4"
+                                    }, 
+                                    {
+                                        "device": "/dev/sda1", 
+                                        "fstype": "xfs", 
+                                        "mount": "/boot", 
+                                        "options": "rw,relatime,attr2,inode64,noquota", 
+                                        "size_available": 344629248, 
+                                        "size_total": 520794112, 
+                                        "uuid": "9c3bcb8c-42d1-41ab-88b8-463b7a2ca912"
+                                    }, 
+                                    {
+                                        "device": "/dev/mapper/centos_ansible--clients--node4-home", 
+                                        "fstype": "xfs", 
+                                        "mount": "/home", 
+                                        "options": "rw,relatime,attr2,inode64,noquota", 
+                                        "size_available": 48872566784, 
+                                        "size_total": 48906858496, 
+                                        "uuid": "3897eb39-8806-42f3-bbf2-5374cf92ecfa"
+                                    }
+                                ], 
+                                "ansible_nodename": "ansible-clients-node4", 
+                                "ansible_os_family": "RedHat", 
+                                "ansible_pkg_mgr": "yum", 
+                                "ansible_processor": [
+                                    "GenuineIntel", 
+                                    "Intel(R) Xeon(R) CPU           X5650  @ 2.67GHz", 
+                                    "GenuineIntel", 
+                                    "Intel(R) Xeon(R) CPU           X5650  @ 2.67GHz"
+                                ], 
+                                "ansible_processor_cores": 1, 
+                                "ansible_processor_count": 2, 
+                                "ansible_processor_threads_per_core": 1, 
+                                "ansible_processor_vcpus": 2, 
+                                "ansible_product_name": "VMware Virtual Platform", 
+                                "ansible_product_serial": "VMware-56 4d 2d e5 26 af 74 4b-75 8b 3b 33 a4 a0 a2 72", 
+                                "ansible_product_uuid": "564D2DE5-26AF-744B-758B-3B33A4A0A272", 
+                                "ansible_product_version": "None", 
+                                "ansible_python": {
+                                    "executable": "/usr/bin/python", 
+                                    "has_sslcontext": true, 
+                                    "type": "CPython", 
+                                    "version": {
+                                        "major": 2, 
+                                        "micro": 5, 
+                                        "minor": 7, 
+                                        "releaselevel": "final", 
+                                        "serial": 0
+                                    }, 
+                                    "version_info": [
+                                        2, 
+                                        7, 
+                                        5, 
+                                        "final", 
+                                        0
+                                    ]
+                                }, 
+                                "ansible_python_version": "2.7.5", 
+                                "ansible_selinux": {
+                                    "status": "disabled"
+                                }, 
+                                "ansible_service_mgr": "systemd", 
+                                "ansible_ssh_host_key_ecdsa_public": "AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBE5NmRYcZ62fA8zW0NC7ANfTjVC67YUvqqnUQEBOoR514donEBqzX1T/B9jYD4pC/RUaAVxQWqLwfLdbL/4FDMs=", 
+                                "ansible_ssh_host_key_ed25519_public": "AAAAC3NzaC1lZDI1NTE5AAAAIC/9zw9UnvRjTdxAywJS4YWN6BndtIfGMDH9P9v793hQ", 
+                                "ansible_ssh_host_key_rsa_public": "AAAAB3NzaC1yc2EAAAADAQABAAABAQDGdXdYq8je5f/QhxwuSNNwxn0zrDfJjS0FvjU4i/i09foXQRkpemawEQNn0Nb/P7U9429+Gv20C+KE6PVqG1VyCN6ghxLPZoUWig8Ndeq3V8al3nMex8bzKu4rAwwcAXRNCLn2hVlxtDZMmIszU1raZ83QdPy6iUsOcVFVlkWy9xVqzgzM/jewxn/TwHtFfEx/5EIHLO+pnaL6rLsQm6jtm/H13RdzUiYGltOURFWizMOtbOWAf2srgP98s1/A17G3uHghoCXKLwChtLKm4sMc2EyDrPnRui1EJHIkKNurfhdpvVAaeBVnfMGPqYr18vaOENN8l3zJ8lFB/FSSWo+X", 
+                                "ansible_swapfree_mb": 3967, 
+                                "ansible_swaptotal_mb": 3967, 
+                                "ansible_system": "Linux", 
+                                "ansible_system_capabilities": [
+                                    "cap_chown", 
+                                    "cap_dac_override", 
+                                    "cap_dac_read_search", 
+                                    "cap_fowner", 
+                                    "cap_fsetid", 
+                                    "cap_kill", 
+                                    "cap_setgid", 
+                                    "cap_setuid", 
+                                    "cap_setpcap", 
+                                    "cap_linux_immutable", 
+                                    "cap_net_bind_service", 
+                                    "cap_net_broadcast", 
+                                    "cap_net_admin", 
+                                    "cap_net_raw", 
+                                    "cap_ipc_lock", 
+                                    "cap_ipc_owner", 
+                                    "cap_sys_module", 
+                                    "cap_sys_rawio", 
+                                    "cap_sys_chroot", 
+                                    "cap_sys_ptrace", 
+                                    "cap_sys_pacct", 
+                                    "cap_sys_admin", 
+                                    "cap_sys_boot", 
+                                    "cap_sys_nice", 
+                                    "cap_sys_resource", 
+                                    "cap_sys_time", 
+                                    "cap_sys_tty_config", 
+                                    "cap_mknod", 
+                                    "cap_lease", 
+                                    "cap_audit_write", 
+                                    "cap_audit_control", 
+                                    "cap_setfcap", 
+                                    "cap_mac_override", 
+                                    "cap_mac_admin", 
+                                    "cap_syslog", 
+                                    "35", 
+                                    "36+ep"
+                                ], 
+                                "ansible_system_capabilities_enforced": "True", 
+                                "ansible_system_vendor": "VMware, Inc.", 
+                                "ansible_uptime_seconds": 3477162, 
+                                "ansible_user_dir": "/root", 
+                                "ansible_user_gecos": "root", 
+                                "ansible_user_gid": 0, 
+                                "ansible_user_id": "root", 
+                                "ansible_user_shell": "/bin/bash", 
+                                "ansible_user_uid": 0, 
+                                "ansible_userspace_architecture": "x86_64", 
+                                "ansible_userspace_bits": "64", 
+                                "ansible_virtualization_role": "guest", 
+                                "ansible_virtualization_type": "VMware", 
+                                "module_setup": true
+                            }, 
+                            "changed": false, 
+                            "invocation": {
+                                "module_args": {
+                                    "fact_path": "/etc/ansible/facts.d", 
+                                    "filter": "*", 
+                                    "gather_subset": [
+                                        "all"
+                                    ], 
+                                    "gather_timeout": 10
+                                }, 
+                                "module_name": "setup"
+                            }
+                        }
+                    }, 
+                    "task": {
+                        "id": "819c8085-5cf7-4a6d-a3bf-af2a9463f0e7", 
+                        "name": ""
+                    }
+                }, 
+                {
+                    "hosts": {
+                        "172.31.4.123": {
+                            "changed": false, 
+                            "msg": "All items completed", 
+                            "results": [
+                                {
+                                    "_ansible_item_result": true, 
+                                    "_ansible_no_log": false, 
+                                    "_ansible_parsed": true, 
+                                    "changed": false, 
+                                    "invocation": {
+                                        "module_args": {
+                                            "conf_file": null, 
+                                            "disable_gpg_check": false, 
+                                            "disablerepo": null, 
+                                            "enablerepo": null, 
+                                            "exclude": null, 
+                                            "install_repoquery": true, 
+                                            "list": null, 
+                                            "name": [
+                                                "gcc", 
+                                                "gcc-c++", 
+                                                "tcl", 
+                                                "make"
+                                            ], 
+                                            "state": "latest", 
+                                            "update_cache": false, 
+                                            "validate_certs": true
+                                        }, 
+                                        "module_name": "yum"
+                                    }, 
+                                    "item": [
+                                        "gcc", 
+                                        "gcc-c++", 
+                                        "tcl", 
+                                        "make"
+                                    ], 
+                                    "msg": "", 
+                                    "rc": 0, 
+                                    "results": [
+                                        "All packages providing gcc are up to date", 
+                                        "All packages providing gcc-c++ are up to date", 
+                                        "All packages providing tcl are up to date", 
+                                        "All packages providing make are up to date", 
+                                        ""
+                                    ]
+                                }
+                            ]
+                        }
+                    }, 
+                    "task": {
+                        "id": "e13c3d82-dc44-4cf1-8559-cb7c7931e0bc", 
+                        "name": "install Dependent for redis"
+                    }
+                }, 
+                {
+                    "hosts": {
+                        "172.31.4.123": {
+                            "_ansible_no_log": false, 
+                            "_ansible_parsed": true, 
+                            "changed": false, 
+                            "dest": "/tmp/", 
+                            "gid": 0, 
+                            "group": "root", 
+                            "handler": "TgzArchive", 
+                            "invocation": {
+                                "module_args": {
+                                    "backup": null, 
+                                    "content": null, 
+                                    "copy": false, 
+                                    "creates": null, 
+                                    "delimiter": null, 
+                                    "dest": "/tmp/", 
+                                    "directory_mode": null, 
+                                    "exclude": [], 
+                                    "extra_opts": [], 
+                                    "follow": false, 
+                                    "force": null, 
+                                    "group": null, 
+                                    "keep_newer": false, 
+                                    "list_files": false, 
+                                    "mode": null, 
+                                    "original_basename": "redis-3.0.0.tar.gz", 
+                                    "owner": null, 
+                                    "regexp": null, 
+                                    "remote_src": false, 
+                                    "selevel": null, 
+                                    "serole": null, 
+                                    "setype": null, 
+                                    "seuser": null, 
+                                    "src": "http://download.redis.io/releases/redis-3.0.0.tar.gz", 
+                                    "unsafe_writes": null, 
+                                    "validate_certs": true
+                                }
+                            }, 
+                            "mode": "01777", 
+                            "owner": "root", 
+                            "size": 4096, 
+                            "src": "/tmp/ansible_9ZBIyW/redis-3.0.0.tar.gz", 
+                            "state": "directory", 
+                            "uid": 0
+                        }
+                    }, 
+                    "task": {
+                        "id": "501a20be-d956-43b7-9453-5034b144c381", 
+                        "name": "download redis redis-3.0.0"
+                    }
+                }, 
+                {
+                    "hosts": {
+                        "172.31.4.123": {
+                            "_ansible_no_log": false, 
+                            "_ansible_parsed": true, 
+                            "changed": true, 
+                            "cmd": "make PREFIX=/software/redis install", 
+                            "delta": "0:00:00.059796", 
+                            "end": "2017-05-06 05:56:49.067553", 
+                            "invocation": {
+                                "module_args": {
+                                    "_raw_params": "make PREFIX=/software/redis install", 
+                                    "_uses_shell": true, 
+                                    "chdir": "/tmp/redis-3.0.0", 
+                                    "creates": null, 
+                                    "executable": null, 
+                                    "removes": null, 
+                                    "warn": true
+                                }, 
+                                "module_name": "command"
+                            }, 
+                            "rc": 0, 
+                            "start": "2017-05-06 05:56:49.007757", 
+                            "stderr": "    \u001b[34;1mINSTALL\u001b[0m \u001b[37;1minstall\u001b[0m\n    \u001b[34;1mINSTALL\u001b[0m \u001b[37;1minstall\u001b[0m\n    \u001b[34;1mINSTALL\u001b[0m \u001b[37;1minstall\u001b[0m\n    \u001b[34;1mINSTALL\u001b[0m \u001b[37;1minstall\u001b[0m\n    \u001b[34;1mINSTALL\u001b[0m \u001b[37;1minstall\u001b[0m", 
+                            "stdout": "cd src && make install\nmake[1]: Entering directory `/tmp/redis-3.0.0/src'\n\nHint: It's a good idea to run 'make test' ;)\n\nmake[1]: Leaving directory `/tmp/redis-3.0.0/src'", 
+                            "stdout_lines": [
+                                "cd src && make install", 
+                                "make[1]: Entering directory `/tmp/redis-3.0.0/src'", 
+                                "", 
+                                "Hint: It's a good idea to run 'make test' ;)", 
+                                "", 
+                                "make[1]: Leaving directory `/tmp/redis-3.0.0/src'"
+                            ], 
+                            "warnings": []
+                        }
+                    }, 
+                    "task": {
+                        "id": "71166fca-c4ad-4795-881c-c297ff0f26d6", 
+                        "name": "Use shell build redis and install"
+                    }
+                }, 
+                {
+                    "hosts": {
+                        "172.31.4.123": {
+                            "_ansible_no_log": false, 
+                            "_ansible_parsed": true, 
+                            "changed": false, 
+                            "diff": {
+                                "after": {
+                                    "path": "/software/redis/bin/redis"
+                                }, 
+                                "before": {
+                                    "path": "/software/redis/bin/redis"
+                                }
+                            }, 
+                            "gid": 0, 
+                            "group": "root", 
+                            "invocation": {
+                                "module_args": {
+                                    "backup": null, 
+                                    "content": null, 
+                                    "delimiter": null, 
+                                    "dest": "/software/redis/bin/redis", 
+                                    "diff_peek": null, 
+                                    "directory_mode": null, 
+                                    "follow": true, 
+                                    "force": false, 
+                                    "group": null, 
+                                    "mode": 493, 
+                                    "original_basename": "redis_init_script.j2", 
+                                    "owner": null, 
+                                    "path": "/software/redis/bin/redis", 
+                                    "recurse": false, 
+                                    "regexp": null, 
+                                    "remote_src": null, 
+                                    "selevel": null, 
+                                    "serole": null, 
+                                    "setype": null, 
+                                    "seuser": null, 
+                                    "src": null, 
+                                    "state": null, 
+                                    "unsafe_writes": null, 
+                                    "validate": null
+                                }
+                            }, 
+                            "mode": "0755", 
+                            "owner": "root", 
+                            "path": "/software/redis/bin/redis", 
+                            "size": 1140, 
+                            "state": "file", 
+                            "uid": 0
+                        }
+                    }, 
+                    "task": {
+                        "id": "327c9855-0a52-49ee-b314-d4fc1492ca8f", 
+                        "name": "transfer script to redis server"
+                    }
+                }, 
+                {
+                    "hosts": {
+                        "172.31.4.123": {
+                            "_ansible_no_log": false, 
+                            "_ansible_parsed": true, 
+                            "changed": false, 
+                            "diff": {
+                                "after": {
+                                    "path": "/software/redis/conf"
+                                }, 
+                                "before": {
+                                    "path": "/software/redis/conf"
+                                }
+                            }, 
+                            "gid": 0, 
+                            "group": "root", 
+                            "invocation": {
+                                "module_args": {
+                                    "backup": null, 
+                                    "content": null, 
+                                    "delimiter": null, 
+                                    "diff_peek": null, 
+                                    "directory_mode": null, 
+                                    "follow": false, 
+                                    "force": false, 
+                                    "group": null, 
+                                    "mode": null, 
+                                    "original_basename": null, 
+                                    "owner": null, 
+                                    "path": "/software/redis/conf", 
+                                    "recurse": false, 
+                                    "regexp": null, 
+                                    "remote_src": null, 
+                                    "selevel": null, 
+                                    "serole": null, 
+                                    "setype": null, 
+                                    "seuser": null, 
+                                    "src": null, 
+                                    "state": "directory", 
+                                    "unsafe_writes": null, 
+                                    "validate": null
+                                }, 
+                                "module_name": "file"
+                            }, 
+                            "mode": "0755", 
+                            "owner": "root", 
+                            "path": "/software/redis/conf", 
+                            "size": 23, 
+                            "state": "directory", 
+                            "uid": 0
+                        }
+                    }, 
+                    "task": {
+                        "id": "ac330082-e56b-43e5-8185-bccf9c0d1c20", 
+                        "name": "Create redis-conf Path"
+                    }
+                }, 
+                {
+                    "hosts": {
+                        "172.31.4.123": {
+                            "_ansible_no_log": false, 
+                            "_ansible_parsed": true, 
+                            "changed": false, 
+                            "diff": {
+                                "after": {
+                                    "path": "/software/redis/logs"
+                                }, 
+                                "before": {
+                                    "path": "/software/redis/logs"
+                                }
+                            }, 
+                            "gid": 0, 
+                            "group": "root", 
+                            "invocation": {
+                                "module_args": {
+                                    "backup": null, 
+                                    "content": null, 
+                                    "delimiter": null, 
+                                    "diff_peek": null, 
+                                    "directory_mode": null, 
+                                    "follow": false, 
+                                    "force": false, 
+                                    "group": null, 
+                                    "mode": null, 
+                                    "original_basename": null, 
+                                    "owner": null, 
+                                    "path": "/software/redis/logs", 
+                                    "recurse": false, 
+                                    "regexp": null, 
+                                    "remote_src": null, 
+                                    "selevel": null, 
+                                    "serole": null, 
+                                    "setype": null, 
+                                    "seuser": null, 
+                                    "src": null, 
+                                    "state": "directory", 
+                                    "unsafe_writes": null, 
+                                    "validate": null
+                                }, 
+                                "module_name": "file"
+                            }, 
+                            "mode": "0755", 
+                            "owner": "root", 
+                            "path": "/software/redis/logs", 
+                            "size": 22, 
+                            "state": "directory", 
+                            "uid": 0
+                        }
+                    }, 
+                    "task": {
+                        "id": "ced6ad74-c7bb-4c87-9a9a-14ff7f6a94b2", 
+                        "name": "Create redis-logs Path"
+                    }
+                }, 
+                {
+                    "hosts": {
+                        "172.31.4.123": {
+                            "_ansible_no_log": false, 
+                            "_ansible_parsed": true, 
+                            "changed": false, 
+                            "diff": {
+                                "after": {
+                                    "path": "/software/redis/conf/redis.conf"
+                                }, 
+                                "before": {
+                                    "path": "/software/redis/conf/redis.conf"
+                                }
+                            }, 
+                            "gid": 0, 
+                            "group": "root", 
+                            "invocation": {
+                                "module_args": {
+                                    "backup": null, 
+                                    "content": null, 
+                                    "delimiter": null, 
+                                    "dest": "/software/redis/conf/redis.conf", 
+                                    "diff_peek": null, 
+                                    "directory_mode": null, 
+                                    "follow": true, 
+                                    "force": false, 
+                                    "group": null, 
+                                    "mode": null, 
+                                    "original_basename": "redis_master.conf.j2", 
+                                    "owner": null, 
+                                    "path": "/software/redis/conf/redis.conf", 
+                                    "recurse": false, 
+                                    "regexp": null, 
+                                    "remote_src": null, 
+                                    "selevel": null, 
+                                    "serole": null, 
+                                    "setype": null, 
+                                    "seuser": null, 
+                                    "src": null, 
+                                    "state": null, 
+                                    "unsafe_writes": null, 
+                                    "validate": null
+                                }
+                            }, 
+                            "mode": "0644", 
+                            "owner": "root", 
+                            "path": "/software/redis/conf/redis.conf", 
+                            "size": 41442, 
+                            "state": "file", 
+                            "uid": 0
+                        }
+                    }, 
+                    "task": {
+                        "id": "fba53905-7fa9-47b7-883d-2a4b31312020", 
+                        "name": "transfer redis-conf to remote server--master"
+                    }
+                }, 
+                {
+                    "hosts": {
+                        "172.31.4.123": {
+                            "_ansible_no_log": false, 
+                            "changed": false, 
+                            "skip_reason": "Conditional check failed", 
+                            "skipped": true
+                        }
+                    }, 
+                    "task": {
+                        "id": "fe06f2b0-6024-4f22-b102-5159d8288bdf", 
+                        "name": "transfer redis-conf to remote server---slave"
+                    }
+                }, 
+                {
+                    "hosts": {
+                        "172.31.4.123": {
+                            "_ansible_no_log": false, 
+                            "_ansible_parsed": true, 
+                            "changed": true, 
+                            "cmd": "./redis start", 
+                            "delta": "0:00:00.011887", 
+                            "end": "2017-05-06 05:56:55.230778", 
+                            "invocation": {
+                                "module_args": {
+                                    "_raw_params": "./redis start", 
+                                    "_uses_shell": true, 
+                                    "chdir": "/software/redis/bin", 
+                                    "creates": null, 
+                                    "executable": null, 
+                                    "removes": null, 
+                                    "warn": true
+                                }, 
+                                "module_name": "command"
+                            }, 
+                            "rc": 0, 
+                            "start": "2017-05-06 05:56:55.218891", 
+                            "stderr": "", 
+                            "stdout": "/software/redis/redis.pid exists, process is already running or crashed", 
+                            "stdout_lines": [
+                                "/software/redis/redis.pid exists, process is already running or crashed"
+                            ], 
+                            "warnings": []
+                        }
+                    }, 
+                    "task": {
+                        "id": "30334b00-7684-4240-8991-60c474a0ba79", 
+                        "name": "start redis......"
+                    }
+                }
+            ]
+        }
+    ], 
+    "stats": {
+        "172.31.4.123": {
+            "changed": 2, 
+            "failures": 0, 
+            "ok": 9, 
+            "skipped": 1, 
+            "unreachable": 0
+        }
+    }
+}
