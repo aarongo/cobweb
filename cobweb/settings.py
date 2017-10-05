@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     's_cobweb',
+    'channels'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -135,7 +136,7 @@ LOGGING = {
     'formatters': {
         'standard': {
             'format': '%(asctime)s [%(threadName)s:%(thread)d] [%(name)s:%(lineno)d] [%(module)s:%(funcName)s] [%(levelname)s]- %(message)s'}
-    # 日志格式
+        # 日志格式
     },
     'filters': {
     },
@@ -210,4 +211,13 @@ LOGGING = {
             'propagate': True
         }
     }
+}
+
+# websocket 配置
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "asgiref.inmemory.ChannelLayer",
+        "ROUTING": "channels_app.routing.channel_routing",
+    },
 }

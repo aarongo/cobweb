@@ -1,4 +1,5 @@
-from django.conf.urls import url, patterns
+from django.conf.urls import patterns, url
+
 from s_cobweb.views import RegisterView
 
 urlpatterns = patterns('s_cobweb.views',
@@ -10,6 +11,11 @@ urlpatterns = patterns('s_cobweb.views',
                        url(r'^return_data', 'return_data', name='return_data'),
                        url(r'^submit_data', 'submit_data', name='submit_data'),
                        url(r'^submit_tmp', 'submit_tmp', name='submit_tmp'),
-                       url(r'^software_tmp', 'software_tmp', name='software_tmp'),
-                       url(r'^software_install', 'software_install', name='software_install')
+                       url(r'^socket_test', 'view_realy', name='socket_test'),
+                       url(r'^supervisorjson', 'supervisorjson', name='supervisorjson'),
+                       url(r'^process_info', 'process_info', name='process_info'),
+                       url(r'^getdetail/(.+)/$', 'getdetail', name='getdetail'),
+                       url(r'^stopprocess/(.+)/$', 'stopprocess', name='stopprocess'),
+                       url(r'^startprocess/(.+)/$', 'startprocess', name='startprocess'),
+                       url(r'^restartprocess/(.+)/$', 'restartprocess', name='restartprocess'),
                        )

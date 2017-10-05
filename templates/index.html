@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/static/css/bootstrap-table.css">
     <link rel="stylesheet prefetch" href="/static/css/font-awesome.min.css">
     <link rel="stylesheet" href="/static/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="/static/layui/dist/css/layui.css">
 </head>
 <body>
 {% block content %}
@@ -33,16 +34,13 @@
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">获取信息<span class="caret"></span></a>
                   <ul class="dropdown-menu" role="menu">
                     <li class="dropdown-header">获取和更新信息</li>
-                    <li><a href="{% url 'search' %}">获取主机信息</a></li>
+                    <li><a href="{% url 'search' %}">查看主机信息</a></li>
                     <li><a href="{% url 'submit_tmp' %}">新增信息</a></li>
+                    <li><a href="{% url 'process_info' %}">logstash信息</a></li>
                   </ul>
                 </li>
                 <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">软件安装 <span class="caret"></span></a>
-                  <ul class="dropdown-menu" role="menu">
-                    <li class="dropdown-header">软件安装</li>
-                    <li><a href="{% url 'software_tmp' %}">分发SSHKEY</a></li>
-                  </ul>
+                  <a href="{% url 'socket_test' %}">查看日志 </a>
                 </li>
                 <li>
                     <a href="#">保留项</a>

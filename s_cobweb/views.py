@@ -1,11 +1,11 @@
 # _*_coding:utf-8_*_
 # Create your views here.
 
-import os, logging
+
+import json
 from django.shortcuts import render
-from public_main import insert_data, select_data, get_host_info, data_updata, run_playbooks
+from public_main import insert_data, select_data, get_host_info, data_updata, supervisor_info
 from django.contrib import auth
-from wsgiref.util import FileWrapper
 from django.http import HttpResponse, HttpResponseRedirect
 
 # 用户注册
@@ -34,7 +34,7 @@ class RegisterView(FormView):
 def author_login(request):
     # 判断前端请求类型
     if request.method == 'GET':
-        return render(request, 'login.html')
+        return render(request, 'login_v2.html')
     else:
         # 获取到 post 过来的数据
         username = request.POST.get('username', '')
@@ -48,7 +48,7 @@ def author_login(request):
             auth.login(request, user)
             return HttpResponseRedirect("/")
         else:
-            return render(request, 'login.html', {
+            return render(request, 'login_v2.html', {
                 'login_status': 404
             })
 
@@ -63,17 +63,6 @@ def author_logout(request):
 def index(request):
     return render(request, 'index.html')
 
-
-def downloader(request):
-    # test.tmp为将要被下载的文件名
-    filename_tmp = 'systeminfo.xlsx'
-    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    filename = os.path.join(BASE_DIR, filename_tmp)
-    wrapper = FileWrapper(file(filename))
-    response = HttpResponse(wrapper, content_type='text/plain')
-    response['Content-Length'] = os.path.getsize(filename)
-    response['Content-Disposition'] = 'attachment; filename="systeminfo.xlsx"'
-    return response
 
 
 @login_required
@@ -119,43 +108,45 @@ def submit_data(request):
         })
 
 
-
-
-@login_required
-# 安装软件临时 URL
-def software_tmp(request):
-    group = select_data.get_gorups()
-    return render(request, 'software_install.html', {
-        "groups": group,
-        "action": dict(send_ssh_key="authorized", system_init="system_init", tomcat_install="tomcat",
-                       nginx_install="nginx", mysql_install="mysql", memcached_install="memcached",
-                       mongodb_install="mongodb_cluster", redis_install="redis", solrcloud="solrcloud",
-                       zookeeper="zookeeper-cluster", zabbix_agent_install="zabbix_agent")
-    })
-
-
-@login_required
-# 安装 运行的 yml 要与组名一致 在 run_playbooks中直接获取
-def software_install(request):
-    actionname = request.POST.get('action_name')
-    groupname = request.POST.get('groupname')
-    varname = request.POST.get('vars')
-    print groupname, actionname, varname, type(eval(varname))
-    logger = logging.getLogger('scripts')  # setting.py中配置的logger
-    logger.info(run_playbooks.playbooks_run(parameters=eval(varname)))
-    return render(request, 'software_install.html', {
-        "run_status": run_playbooks.zdy_result(),
-        "run_all_status": run_playbooks.resultall_status()
-    })
-
-
-def test(request):
-    return render(request, 'index.html')
-
-
 def inset(request):
     hostname = request.POST.get('hostname')
     ipaddress = request.POST.get('ipaddress')
     groupname = request.POST.get('groupname')
-    insert_data.insert_host(name=hostname, address=ipaddress,groupname=groupname)
+    insert_data.insert_host(name=hostname, address=ipaddress, groupname=groupname)
     return render(request, 'insetdata.html')
+
+
+def view_realy(request):
+    return render(request, 'socket_test.html')
+
+
+def supervisorjson(request):
+    return HttpResponse(json.dumps(supervisor_info.supervisorinfo()), content_type="application/json")
+
+
+def process_info(request):
+    return render(request, 'process_info.html')
+
+
+def getdetail(request, param1):
+    data = supervisor_info.getdeatil(hostname=param1)
+    return render(request, 'getDetail.html', {
+        'data': data
+    })
+
+
+def stopprocess(request, param2):
+    r_status = supervisor_info.stopprocess(hostname=param2)
+    return HttpResponse(json.dumps(r_status), content_type="application/json")
+
+
+def startprocess(request, param3):
+    r_status = supervisor_info.startprocess(hostname=param3)
+    return HttpResponse(json.dumps(r_status), content_type="application/json")
+
+
+def restartprocess(request, param3):
+    r_status = supervisor_info.restartprocess(hostname=param3)
+    return HttpResponse(json.dumps(r_status), content_type="application/json")
+
+

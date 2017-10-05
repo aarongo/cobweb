@@ -29,7 +29,7 @@ def get_info(host):
         disk_total = sum([int(get_results["ansible_devices"][i]["sectors"]) *
                           int(get_results["ansible_devices"][i][
                                   "sectorsize"]) / 1024 / 1024 / 1024
-                          for i in get_results["ansible_devices"] if i[0:2] in ("sd", "ss")])
+                          for i in get_results["ansible_devices"] if i[0:2] in ("vd", "vs")])
         server_type = get_results["ansible_product_name"].encode('utf-8')
         host_name = get_results["ansible_hostname"].encode('utf-8')
         os_kernel = get_results["ansible_kernel"].encode('utf-8')

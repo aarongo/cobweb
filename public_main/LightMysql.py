@@ -135,29 +135,3 @@ def main():
 
     db = LightMysql(dbconfig)
     return db
-# if __name__ == '__main__':
-#
-#
-#     # sql_create = "create table test0 (`ShowMapID` int(11))"
-#     # print sql_create
-#     # db.query(sql_create)
-#     #
-#     # sql_insert = "insert into test0 values('2')"
-#     # print sql_insert
-#     # result_insert = db.dml(sql_insert)
-#     # print result_insert
-#     #
-#     # sql_update = "update test0 set ShowMapID=3 where ShowMapID=2"
-#     # print sql_update
-#     # db.dml(sql_update)
-#
-#     sql_select = "SELECT * from s_cobweb_host h,s_cobweb_hostgroup g WHERE g.`name`=h.groupname and g.`name`='zookeeper-cluster'"
-#     print sql_select
-#
-#     result_all = main().select(sql_select)
-#     # print result_all
-#     #统计条数--即统计主机
-#     result_count = main().select(sql_select, 'count')
-#     # print result_count
-#     for i in result_all:
-#         print i.get('address')
