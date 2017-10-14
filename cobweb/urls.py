@@ -16,20 +16,11 @@ Including another URLconf
 
 from django.conf.urls import include, url
 from django.contrib import admin
+from django.conf import settings
+
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'', include('s_cobweb.urls')),
+    # url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
 ]
-
-
-# urlpatterns = [
-#     url(r'^$', small_cobweb.index, name='index'),
-#     url(r'^download/', small_cobweb.downloader, name='download'),
-#     url(r'^admin/', include(admin.site.urls)),
-#     url(r'^search/', small_cobweb.search),
-#     url(r'^inset/',small_cobweb.inset,name='insert_data'),
-#     url(r'^insert_bash/',small_cobweb.insert_bash,name='insert_bash'),
-#     url(r'^author_login/', small_cobweb.author_login, name='login'),
-#
-# ]

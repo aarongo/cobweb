@@ -1,21 +1,19 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import url
+from s_cobweb.views import *
 
-from s_cobweb.views import RegisterView
-
-urlpatterns = patterns('s_cobweb.views',
-                       url(r'^$', 'index', name='index'),
-                       url(r'^login/', 'author_login', name='login'),
-                       url(r'^logout', 'author_logout', name='logout'),
-                       url('^register/$', RegisterView.as_view(), name='register'),
-                       url(r'^search/', 'search', name='search'),
-                       url(r'^return_data', 'return_data', name='return_data'),
-                       url(r'^submit_data', 'submit_data', name='submit_data'),
-                       url(r'^submit_tmp', 'submit_tmp', name='submit_tmp'),
-                       url(r'^socket_test', 'view_realy', name='socket_test'),
-                       url(r'^supervisorjson', 'supervisorjson', name='supervisorjson'),
-                       url(r'^process_info', 'process_info', name='process_info'),
-                       url(r'^getdetail/(.+)/$', 'getdetail', name='getdetail'),
-                       url(r'^stopprocess/(.+)/$', 'stopprocess', name='stopprocess'),
-                       url(r'^startprocess/(.+)/$', 'startprocess', name='startprocess'),
-                       url(r'^restartprocess/(.+)/$', 'restartprocess', name='restartprocess'),
-                       )
+urlpatterns = [
+   url(r'^$', index, name='index'),
+   url(r'^login/', author_login, name='login'),
+   url(r'^logout', author_logout, name='logout'),
+   url('^register/$', RegisterView.as_view(), name='register'),
+   url(r'^assets_info/', assets_info, name='assets_info'),
+   url(r'^submit_data', submit_data, name='submit_data'),
+   url(r'^submit_tmp', submit_tmp, name='submit_tmp'),
+   url(r'^supervisor_json', supervisor_json, name='supervisor_json'),
+   url(r'^process_info', process_info, name='process_info'),
+   url(r'^information_detail/$', information_detail, name='information_detail'),
+   url(r'^process_stop/(.+)/$', process_stop, name='process_stop'),
+   url(r'^process_start/(.+)/$', process_start, name='process_start'),
+   url(r'^process_restart/(.+)/$', process_restart, name='process_restart'),
+   url(r'^assets_json', assets_json, name='assets_json')
+]

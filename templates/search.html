@@ -5,75 +5,100 @@
 
 
 {% block middlepart %}
+
     <div class="container">
-        <div id="toolbar">
-            <select class="form-control">
-                <option value="">导出基本</option>
-                <option value="all">导出所有</option>
-                <option value="selected">导出选择部分</option>
-            </select>
-        </div>
-        <button type="button" class="btn btn-primary btn-lg " id="load" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> 更新中...">更新</button>
-        <table id="table"
-               data-click-to-select="true"
-               data-search="true"
-               data-show-toggle="true"
-               data-show-columns="true"
-               data-toggle="table"
-               data-toolbar="#toolbar"
-               data-height="500"
-               data-url="/static/json/data.json"
-               data-show-export="true"
-               >
-            <thead>
-            <tr>
-                <th data-field="state" data-checkbox="true"></th>
-                <th data-field="address">IP地址</th>
-                <th data-field="name">主机名</th>
-                <th data-field="disk_total">硬盘大小(GB)</th>
-                <th data-field="cpu_total">CPU个数</th>
-                <th data-field="mem_total">内存大小(MB)</th>
-                <th data-field="server_type">服务器型号</th>
-                <th data-field="swap_total">虚拟内存大小(MB)</th>
-                <th data-field="os_type">操作系统类型</th>
-                <th data-field="os_kernel">内核版本</th>
-                <th data-field="cpu_type"> CPU型号</th>
-                <th data-field="group_name">主机组</th>
-            </tr>
-            </thead>
-        </table>
+    <div class="input-group col-md-3">
+       <input type="text" class="form-control" placeholder="请输入字段名">
+            <span class="input-group-btn">
+               <button class="btn btn-info btn-search">查找</button>
+               <button class="btn btn-info btn-search" style="margin-left:3px">添加</button>
+            </span>
+    </div>
+        <table id="table"></table>
     </div>
     <script src="/static/js/jquery.min.js" ></script>
     <script src="/static/js/bootstrap-table.js"></script>
     <!--添加导出数据的按钮-->
     <script src="/static/js/bootstrap-table-export.js"></script>
     <!--添加导出数据-->
-    <script src="/static/js/tableExport.min.js"></script>
-<script>
-    var table1 = $('#table'),
-        button1 = $('#load');
-    $(function () {
-        button1.on('click', function() {
-            var $this = $(this);
-            $this.button('loading');
-            $.ajax({
-               url: '/return_data',
-               success: function() {
-                   table1.bootstrapTable('refresh');
-                   $this.button('reset');
-               },
-               error: function(e) {
-                   console.log(e.responseText);
-               }
-            });
+    <script src="/static/js/tableExport.js"></script>
+    <!--显示中文-->
+    <script type="text/javascript" src="/static/js/bootstrap-table-zh-CN.js"></script>
+    <!--便捷插件-->
+    <script type="text/javascript" src="/static/js/bootstrap-table-editable.js"></script>
 
-        });
-    });
+
+<script type="text/javascript">
+    // 导出表格配置
+    var $table = $('#table');
     $(function () {
-        $('#toolbar').find('select').change(function () {
-            table1.bootstrapTable('destroy').bootstrapTable({
-                exportDataType: $(this).val()
-            });
+        $table.bootstrapTable({
+            url: '{% url 'assets_json' %}',  // 请求数据源的路由
+            method: 'get',
+            dataType: "json",
+            pagination: true, //前端处理分页
+            singleSelect: false,//是否只能单选
+{#            search: true, //显示搜索框，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大#}
+            searchOnEnterKey: true,
+            toolbar: '#toolbar', //工具按钮用哪个容器
+            striped: true, //是否显示行间隔色
+            cache: false, //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+            pageNumber: 1, //初始化加载第10页，默认第一页
+            pageSize: 10, //每页的记录行数（*）
+            pageList: [10, 20, 50, 100], //可供选择的每页的行数（*）
+            queryParamsType: '',
+            strictSearch: false,//设置为 true启用 全匹配搜索，false为模糊搜索
+            showColumns: true, //显示内容列下拉框
+            showRefresh: true, //显示刷新按钮
+            minimumCountColumns: 2, //当列数小于此值时，将隐藏内容列下拉框
+            clickToSelect: true, //设置true， 将在点击某行时，自动勾选rediobox 和 checkbox
+    {#                height: 400, //表格高度，如果没有设置height属性，表格自动根据记录条数决定表格高度#}
+            uniqueId: "ip", //每一行的唯一标识，一般为主键列
+            showToggle: true, //是否显示详细视图和列表视图的切换按钮
+            cardView: false, //是否显示详细视图
+    {#                detailView: true, //是否显示父子表，设置为 true 可以显示详细页面模式,在每行最前边显示+号#}
+            sidePagination: "server", //分页方式：client客户端分页，server服务端分页（*）
+            columns: [{  //定义表头,这个表头必须定义,下边field后边跟的字段名字必须与后端传递的字段名字相同.如:id、name、price 跟后端的字段名id  name price是完全一样的.
+
+                field: 'address',
+                title: '地址',
+                align: 'center',  //对齐方式，居中
+    {#                width: '200px'  // 可以写各种样式#}
+
+            }, {
+                field: 'name',
+                title: '主机名',
+                align: 'center'
+            }, {
+                field: 'disk_total',
+                title: '硬盘容量',
+                align: 'center'
+
+            }, {
+                field: 'cpu_total',
+                title: 'CPU个数',
+                align: 'center'
+
+            },{
+                field: 'mem_total',
+                title: '内存容量',
+                align: 'center'
+
+            },{
+                field: 'os_type',
+                title: '系统类型',
+                align: 'center'
+
+            },{
+                title: '操作',
+                field: 'ip',
+                align: 'center',
+                formatter: function (value, row, index) {
+                    var e = '<a href="#" mce_href="#" onclick="edit(\'' + row.ip + '\')">编辑</a> ';  //row.id为每行的id
+                    return e;
+                }
+            }
+            ]
         });
     })
 </script>

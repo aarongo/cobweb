@@ -1,70 +1,76 @@
 {% extends 'index.html' %}
 
-{% block title %}supervisor信息{%  endblock %}
+{% block title %}Supervisor Manager{%  endblock %}
 
 {% block middlepart %}
-
-        <h1>supervisor logstash 信息</h1>
+<div class="container">
+    <div class="page-header col-md-8 col-sm-offset-2 text-center">
+      <h1><strong>Supervisor进程统一管理</strong> <small>Lostash管理</small></h1>
+    </div>
+    <div>
         <table id="table" lay-filter="table_filter"> </table>
-    <script type="text/html" id="barDemo">
-      <a class="layui-btn layui-btn-mini" lay-event="detail">查看</a>
-      <a class="layui-btn layui-btn-mini" lay-event="start">启动</a>
-      <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="stop">停止</a>
-      <a class="layui-btn layui-btn-mini" lay-event="restart">重启</a>
-      <a class="layui-btn layui-btn-mini" lay-event="logs">查看日志</a>
-    </script>
-    <script src="/static/layui/dist/layui.js"></script>
+    </div>
+        <script type="text/html" id="barDemo">
+          <a class="layui-btn layui-btn-mini" lay-event="detail">查看</a>
+          <a class="layui-btn layui-btn-mini" lay-event="start">启动</a>
+          <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="stop">停止</a>
+          <a class="layui-btn layui-btn-mini" lay-event="restart">重启</a>
+        </script>
+        <script src="/static/layui/dist/layui.js"></script>
+        <script>
+            layui.use(['layer', 'table','element'], function(){
+                var layer = layui.layer; //弹层
+                var table = layui.table;
+                var element = layui.element;
+                //执行渲染
+                table.render({
+                  elem: '#table' //指定原始表格元素选择器（推荐id选择器）
+                  ,height: 315 //容器高度
+                  ,width: 998
+                  ,limits: [5,10,15,20]
+                  ,even: true
+                  ,cols: [[
+                        {field: 'hostname', title: '主机名',width:140} //其它参数在此省略
+                        ,{field: 'ipaddress', title: '地址', width:140}
+                        ,{field: 'name',title: '程序名称',width:150},
+                        {field: 'description', title: '描述', width:260},
+                        {field: 'statename', title: '运行状态', width:100},
+                        {width:200, align:'center', toolbar: '#barDemo'}
+                    ]] //设置表头
+                    ,page: true,
+                    url:'supervisor_json'
 
-    <script>
-        layui.use(['layer', 'table','element'], function(){
-            var layer = layui.layer; //弹层
-            var table = layui.table;
-            var element = layui.element;
-            //执行渲染
-            table.render({
-              elem: '#table' //指定原始表格元素选择器（推荐id选择器）
-              ,height: 315 //容器高度
-              ,cols: [[
-                    {field: 'hostname', title: '主机名',width:140} //其它参数在此省略
-                    ,{field: 'name',title: 'name',width:150},
-                    {field: 'description', title: '描述', width:270},
-                    {field: 'statename', title: '运行状态', width:100},
-                    {width:280, align:'center', toolbar: '#barDemo'}
-                ]] //设置表头
-                ,page: true,
-                url:'supervisorjson'
-
-              //,…… //更多参数参考右侧目录：基本参数选项
-            });
-            //监听工具条
-            table.on('tool(table_filter)', function(obj){ //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
-              var data = obj.data; //获得当前行数据
-              var layEvent = obj.event; //获得 lay-event 对应的值
-              var tr = obj.tr; //获得当前行 tr 的DOM对象
-              if(layEvent === 'detail'){ //查看
-                layer.open({
-                  type: 2,
-                  area: ['550px', '550px'],
-                  fixed: false, //不固定
-                  maxmin: true,
-                  content: '/getdetail/'+ data.hostname
+                  //,…… //更多参数参考右侧目录：基本参数选项
                 });
-              } else if(layEvent === 'stop'){ //删除
-                $.get('/stopprocess/'+ data.hostname, {}, function(str){
-                    layer.alert(str.status, {icon: 1});
+                //监听工具条
+                table.on('tool(table_filter)', function(obj){ //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
+                  var data = obj.data; //获得当前行数据
+                  var layEvent = obj.event; //获得 lay-event 对应的值
+                  var tr = obj.tr; //获得当前行 tr 的DOM对象
+                  if(layEvent === 'detail'){ //查看
+                    layer.open({
+                      type: 2,
+                      area: ['550px', '550px'],
+                      fixed: false, //不固定
+                      maxmin: true,
+                      content: '/information_detail/?'+ 'f_hostname='+data.hostname + '&'+'pid='+data.pid
+                    });
+                  } else if(layEvent === 'stop'){ //停止
+                    $.get('/process_stop/'+ data.hostname, {}, function(str){
+                        layer.alert(str.status, {icon: 1});
+                    });
+                  } else if(layEvent === 'start'){ //启动
+                    $.get('/process_start/'+ data.hostname, {}, function(str){
+                        layer.alert(str.status, {icon: 1});
+                    });
+                  } else if(layEvent === 'restart') { //重启
+                      $.get('/process_restart/' + data.hostname, {}, function (str) {
+                          layer.alert(str.status, {icon: 1});
+                      });
+                  }
                 });
-              } else if(layEvent === 'start'){ //编辑
-                $.get('/startprocess/'+ data.hostname, {}, function(str){
-                    layer.alert(str.status, {icon: 1});
-                });
-              } else if(layEvent === 'restart') { //编辑
-                  $.get('/restartprocess/' + data.hostname, {}, function (str) {
-                      layer.alert(str.status, {icon: 1});
-                  });
-              }
-            });
-        })
-    </script>
-
+            })
+        </script>
+</div>
 
 {% endblock %}

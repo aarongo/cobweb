@@ -3,18 +3,19 @@
 
 
 import json
-from django.shortcuts import render
-from public_main import insert_data, select_data, get_host_info, data_updata, supervisor_info
-from django.contrib import auth
-from django.http import HttpResponse, HttpResponseRedirect
 
+
+from django.contrib import auth
+from django.contrib.auth import authenticate, login
 # 用户注册
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse_lazy
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render
 from django.views.generic.edit import FormView
-from django.contrib.auth import authenticate, login
 
 from forms import RegisterForm
+from public_main import insert_data, mysql_handle, get_host_info, supervisor_info
 
 
 class RegisterView(FormView):
@@ -64,26 +65,39 @@ def index(request):
     return render(request, 'index.html')
 
 
-
+# 获取主机信息
 @login_required
-def search(request):
+def assets_json(request):
+    # 前端传入分页信息
+    pagenum = int(request.GET.get('pageNumber'))
+    pagesize = int(request.GET.get('pageSize'))
+    # 留下一个伏笔 get_host_info.py refush_data 方法 根据返回值来确定取值
+    data = get_host_info.refush_data(pagenum, pagesize)
+    return HttpResponse(json.dumps(data), content_type="application/json")
+
+
+# 资产页面
+@login_required
+def assets_info(request):
     # 进行访问时首先刷新 json 文件
-    data_updata.json_input()
+    #data_updata.json_input()
     return render(request, 'search.html')
 
 
-@login_required
-def return_data(request):
-    # 进行判断数据库是否更新过,如果更新过直接查询库填入 json 文件 如果没有 进行查询填入json 文件和更新数据库
-    if data_updata.data_exist() != data_updata.count_host():
-        ip = select_data.get_address()
-        data_source = get_host_info.get_info(host=ip)
-        data_updata.update_data(data=data_source)
-        get_host_info.input_json(dictobj=data_source)
-    else:
-        data_updata.json_input()
-        return HttpResponse("已经更新过了")
-    return HttpResponse("更新数据")
+
+
+# @login_required
+# def return_data(request):
+#     # 进行判断数据库是否更新过,如果更新过直接查询库填入 json 文件 如果没有 进行查询填入json 文件和更新数据库
+#     if data_updata.data_exist() != data_updata.count_host():
+#         ip = mysql_handle.get_address()
+#         data_source = get_host_info.get_info(host=ip)
+#         data_updata.update_data(data=data_source)
+#         get_host_info.input_json(dictobj=data_source)
+#     else:
+#         data_updata.json_input()
+#         return HttpResponse("已经更新过了")
+#     return HttpResponse("更新数据")
 
 
 @login_required
@@ -108,6 +122,7 @@ def submit_data(request):
         })
 
 
+@login_required
 def inset(request):
     hostname = request.POST.get('hostname')
     ipaddress = request.POST.get('ipaddress')
@@ -116,37 +131,43 @@ def inset(request):
     return render(request, 'insetdata.html')
 
 
-def view_realy(request):
-    return render(request, 'socket_test.html')
 
 
-def supervisorjson(request):
-    return HttpResponse(json.dumps(supervisor_info.supervisorinfo()), content_type="application/json")
+@login_required
+def supervisor_json(request):
+    return HttpResponse(json.dumps(supervisor_info.control().supervisor_information()), content_type="application/json")
 
 
+@login_required
 def process_info(request):
     return render(request, 'process_info.html')
 
 
-def getdetail(request, param1):
-    data = supervisor_info.getdeatil(hostname=param1)
+@login_required
+def information_detail(request):
+    hostname = str(request.GET.get('f_hostname'))
+    pid = int(request.GET.get('pid'))
+    data = supervisor_info.control(hostname=hostname, pid=pid).supervisor_deatil()
     return render(request, 'getDetail.html', {
         'data': data
     })
 
 
-def stopprocess(request, param2):
-    r_status = supervisor_info.stopprocess(hostname=param2)
+@login_required
+def process_stop(request, f_hostname):
+    r_status = supervisor_info.control(hostname=f_hostname).process_stop()
     return HttpResponse(json.dumps(r_status), content_type="application/json")
 
 
-def startprocess(request, param3):
-    r_status = supervisor_info.startprocess(hostname=param3)
+@login_required
+def process_start(request, f_hostname):
+    r_status = supervisor_info.control(hostname=f_hostname).process_start()
     return HttpResponse(json.dumps(r_status), content_type="application/json")
 
 
-def restartprocess(request, param3):
-    r_status = supervisor_info.restartprocess(hostname=param3)
+@login_required
+def process_restart(request, f_hostname):
+    r_status = supervisor_info.control(hostname=f_hostname).process_restart()
     return HttpResponse(json.dumps(r_status), content_type="application/json")
 
 
