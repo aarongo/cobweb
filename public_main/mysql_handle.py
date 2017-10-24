@@ -88,5 +88,18 @@ def get_gorups():
         group.append(i['name'].encode('utf8'))
     return group
 
-if __name__ == '__main__':
-    get_address(num=1,size=10)
+
+# 插入数据
+def inset_data(address, group):
+    sql = "INSERT INTO s_cobweb_host (address, group_name, exist) VALUES ('%s', '%s', 0)"%(address, group)
+    result = mysql_runner().select(sql)
+
+
+# 插入主机
+def insert_host(address, group_name):
+    if address in all_address():
+        return 1
+    else:
+        sql = "INSERT INTO s_cobweb_host(address, group_name, exist) VALUES ('%s','%s',0)"%(address, group_name)
+        result_insert_host = mysql_runner().dml(sql)
+        return result_insert_host

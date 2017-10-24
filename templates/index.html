@@ -10,6 +10,7 @@
     <link rel="stylesheet prefetch" href="/static/css/font-awesome.min.css">
     <link rel="stylesheet" href="/static/css/bootstrap-select.min.css">
     <link rel="stylesheet" href="/static/layui/dist/css/layui.css">
+    <link rel="stylesheet" href="/static/css/bootstrapValidator.css">
 </head>
 <body>
 {% block content %}
@@ -35,7 +36,6 @@
                   <ul class="dropdown-menu" role="menu">
                     <li class="dropdown-header">获取和更新信息</li>
                     <li><a href="{% url 'assets_info' %}">查看主机信息</a></li>
-                    <li><a href="{% url 'submit_tmp' %}">新增信息</a></li>
                     <li><a href="{% url 'process_info' %}">logstash信息</a></li>
                   </ul>
                 </li>

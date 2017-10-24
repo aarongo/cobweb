@@ -15,7 +15,7 @@ from django.shortcuts import render
 from django.views.generic.edit import FormView
 
 from forms import RegisterForm
-from public_main import insert_data, mysql_handle, get_host_info, supervisor_info
+from public_main import mysql_handle, get_host_info, supervisor_info
 
 
 class RegisterView(FormView):
@@ -84,6 +84,14 @@ def assets_info(request):
     return render(request, 'search.html')
 
 
+@login_required
+# 新增数据页面
+def add_data(request):
+    ip_address = str(request.GET.get('ip_address'))
+    group = request.GET.get('group')
+    inset_data = mysql_handle.insert_host(ip_address, group)
+    print inset_data
+    return HttpResponse("sfasdf")
 
 
 # @login_required
@@ -98,39 +106,6 @@ def assets_info(request):
 #         data_updata.json_input()
 #         return HttpResponse("已经更新过了")
 #     return HttpResponse("更新数据")
-
-
-@login_required
-# 提交数据时的临时调用方法
-def submit_tmp(request):
-    return render(request, 'insert.html')
-
-
-@login_required
-# 提交数据真正调用的方法
-def submit_data(request):
-    if request.method == 'GET':
-        return render(request, 'insert.html')
-    else:
-        address = request.POST.get('address')
-        groupname = request.POST.get('group_name')
-        g_status = insert_data.insert_group(groupname=groupname)
-        h_status = insert_data.insert_host(address=address, group_name=groupname)
-        return render(request, 'insert.html', {
-            "g_status": g_status,
-            "h_status": h_status,
-        })
-
-
-@login_required
-def inset(request):
-    hostname = request.POST.get('hostname')
-    ipaddress = request.POST.get('ipaddress')
-    groupname = request.POST.get('groupname')
-    insert_data.insert_host(name=hostname, address=ipaddress, groupname=groupname)
-    return render(request, 'insetdata.html')
-
-
 
 
 @login_required

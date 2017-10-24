@@ -107,7 +107,10 @@ class control(object):
     # view 方法传参hostname
     def process_restart(self):
         server = self.supervisor_base()
-        result = server.supervisor.signalProcess(self.handle_base(), 'HUP')
+        if len(server.supervisor.getAllProcessInfo()) > 1:
+            result = server.supervisor.signalProcess(self.handle_base(), 'HUP')
+        else:
+            result = server.supervisor.restart()
         if result:
             self.custom_result = {'status': '重启成功'}
         return self.custom_result

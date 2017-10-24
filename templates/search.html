@@ -7,14 +7,56 @@
 {% block middlepart %}
 
     <div class="container">
-    <div class="input-group col-md-3">
-       <input type="text" class="form-control" placeholder="请输入字段名">
-            <span class="input-group-btn">
-               <button class="btn btn-info btn-search">查找</button>
-               <button class="btn btn-info btn-search" style="margin-left:3px">添加</button>
-            </span>
+    <div id="toolbar" class="btn-group">
+        <button id="btn_add" type="button" class="btn btn-default">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
+        </button>
     </div>
         <table id="table"></table>
+    </div>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+         <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body" id="list_id">
+                      <div class="form-group">
+                          <label for="txt_departmentname">IP地址</label>
+                          <input type="text" name="ip_address" class="form-control" id="ip_address" placeholder="IP地址">
+                      </div>
+                      <div class="form-group">
+                          <label for="txt_departmentname">所属组</label>
+                          <input type="text" name="group" class="form-control" id="group" placeholder="组信息">
+                      </div>
+{#                      <div class="form-group">#}
+{#                          <label for="txt_parentdepartment">主机名称</label>#}
+{#                          <input type="text" name="hostname" class="form-control" id="hostname" placeholder="主机名称">#}
+{#                      </div>#}
+{#                      <div class="form-group">#}
+{#                          <label for="txt_departmentlevel">硬盘容量</label>#}
+{#                          <input type="text" name="disk" class="form-control" id="disk" placeholder="硬盘容量">#}
+{#                      </div>#}
+{#                      <div class="form-group">#}
+{#                          <label for="txt_departmentlevel">CPU个数</label>#}
+{#                          <input type="text" name="cpu_nums" class="form-control" id="cpu_nums" placeholder="CPU个数">#}
+{#                      </div>#}
+{#                      <div class="form-group">#}
+{#                          <label for="txt_departmentlevel">内存容量</label>#}
+{#                          <input type="text" name="mem" class="form-control" id="mem" placeholder="内存容量">#}
+{#                      </div>#}
+{#                      <div class="form-group">#}
+{#                          <label for="txt_departmentlevel">系统类型</label>#}
+{#                          <input type="text" name="type" class="form-control" id="type" placeholder="系统类型">#}
+{#                      </div>#}
+{#                      <div class="form-group">#}
+{#                          <label for="txt_statu">是否更新</label>#}
+{#                          <input type="text" name="txt_statu" class="form-control" id="txt_statu" placeholder="是否更新1或者0">#}
+{#                      </div>#}
+                    </div>
+                     <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>关闭</button>
+                      <button type="button" id="btn_submit" class="btn btn-primary" data-dismiss="modal"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>保存</button>
+                     </div>
+                </div>
+         </div>
     </div>
     <script src="/static/js/jquery.min.js" ></script>
     <script src="/static/js/bootstrap-table.js"></script>
@@ -26,7 +68,46 @@
     <script type="text/javascript" src="/static/js/bootstrap-table-zh-CN.js"></script>
     <!--便捷插件-->
     <script type="text/javascript" src="/static/js/bootstrap-table-editable.js"></script>
+    <script type="text/javascript">
+        //注册新增按钮的事件
+        $("#btn_add").click(function () {
+            $('#myModal').modal();
+        });
+        //var recipe = {};
+        //recipe["name"] = $("#txt_statu").val();
+        var obj = new Object();
+        $("#btn_submit").click(function () {
+            $("#list_id").children().each(function(){
+                var _name = $(this).children('input').attr('name');
+                var id = $(this).children('input').attr('id');
+                var value = $(this).children('input').val();
+                obj[_name]=value;
+                return validator (id,value);
+            });
+            console.log(obj);
+          $.ajax({
+              type : "get",
+              url : "{% url 'add_data' %}",
+              dataType : 'JSON',
+              data: obj,
+              success: function (data, status) {
+                    alert(status);
+                }
+            });
+        });
 
+        function validator(id,value){
+            var reg = "";
+            if(id==='ip_address'){
+                reg = /^(?:(?:2[0-4][0-9]\.)|(?:25[0-5]\.)|(?:1[0-9][0-9]\.)|(?:[1-9][0-9]\.)|(?:[0-9]\.)){3}(?:(?:2[0-5][0-5])|(?:25[0-5])|(?:1[0-9][0-9])|(?:[1-9][0-9])|(?:[0-9]))$/;
+                if(!reg.test(value)){
+                    alert("ip 格式不对!");
+                    return false;
+                }
+            }
+
+        }
+    </script>
 
 <script type="text/javascript">
     // 导出表格配置
