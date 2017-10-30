@@ -12,7 +12,8 @@ class control(object):
         "rest-api-node2": "10.200.200.38",
         "rest-api-node3": "10.200.200.42",
         "rest-api-node4": "10.200.200.43",
-        "wap-nginx": "10.200.200.76"
+        "wap-nginx": "10.200.200.76",
+        "syzmm_maintenance-node1": "10.200.200.45"
     }
 
     def __init__(self, hostname=None, pid=None, custom_result=None):
