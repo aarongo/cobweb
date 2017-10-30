@@ -44,6 +44,7 @@ class Host(models.Model):
     disk_total = models.IntegerField('硬盘总容量(GB)', null=True, blank=True, default=0)
     group_name = models.CharField('主机组名称', max_length=200, null=True, blank=True, default='null')
     exist = models.IntegerField('更新', default=0)
+    supervisor_exist = models.IntegerField('是否存在supervisor', default=0)
 
     def __unicode__(self):
         return self.name

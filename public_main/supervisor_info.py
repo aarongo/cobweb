@@ -4,17 +4,10 @@
 
 
 import xmlrpclib
-
+import mysql_handle
 
 class control(object):
-    ip_address = {
-        "rest-api-node1": "10.200.200.37",
-        "rest-api-node2": "10.200.200.38",
-        "rest-api-node3": "10.200.200.42",
-        "rest-api-node4": "10.200.200.43",
-        "wap-nginx": "10.200.200.76",
-        "syzmm_maintenance-node1": "10.200.200.45"
-    }
+    ip_address = mysql_handle.supervisor_address()
 
     def __init__(self, hostname=None, pid=None, custom_result=None):
         # 所有的实例都共享此变量，即不单独为每个实例分配
@@ -115,6 +108,7 @@ class control(object):
         if result:
             self.custom_result = {'status': '重启成功'}
         return self.custom_result
+
 
 
 

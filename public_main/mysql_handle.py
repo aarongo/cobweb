@@ -69,6 +69,16 @@ def all_address():
     return address
 
 
+# 获取存在supervisor 进程的主机
+def supervisor_address():
+    result = {}
+    sql = "SELECT address, name from s_cobweb_host WHERE supervisor_exist=1"
+    result_address = mysql_runner().select(sql)
+    for info in result_address:
+        result[info.get('name').encode('utf8')] = info.get('address').encode('utf8')
+    return result
+
+
 # 获取IP地址-并且进行分页-并且直接返回数据
 def get_address(num, size):
     pagesize = size
@@ -96,10 +106,10 @@ def inset_data(address, group):
 
 
 # 插入主机
-def insert_host(address, group_name):
+def insert_host(address, group_name, supervisor):
     if address in all_address():
         return 1
     else:
-        sql = "INSERT INTO s_cobweb_host(address, group_name, exist) VALUES ('%s','%s',0)"%(address, group_name)
+        sql = "INSERT INTO s_cobweb_host(address, group_name, exist, supervisor_exist) VALUES ('%s','%s',0,'%s')"%(address, group_name, supervisor)
         result_insert_host = mysql_runner().dml(sql)
         return result_insert_host

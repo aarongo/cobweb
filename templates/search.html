@@ -26,10 +26,10 @@
                           <label for="txt_departmentname">所属组</label>
                           <input type="text" name="group" class="form-control" id="group" placeholder="组信息">
                       </div>
-{#                      <div class="form-group">#}
-{#                          <label for="txt_parentdepartment">主机名称</label>#}
-{#                          <input type="text" name="hostname" class="form-control" id="hostname" placeholder="主机名称">#}
-{#                      </div>#}
+                      <div class="form-group">
+                          <label for="txt_parentdepartment">是否存在supervisor</label>
+                          <input type="text" name="supervisor" class="form-control" id="supervisor" placeholder="supervisor">
+                      </div>
 {#                      <div class="form-group">#}
 {#                          <label for="txt_departmentlevel">硬盘容量</label>#}
 {#                          <input type="text" name="disk" class="form-control" id="disk" placeholder="硬盘容量">#}
@@ -170,15 +170,16 @@
                 title: '系统类型',
                 align: 'center'
 
-            },{
-                title: '操作',
-                field: 'ip',
-                align: 'center',
-                formatter: function (value, row, index) {
-                    var e = '<a href="#" mce_href="#" onclick="edit(\'' + row.ip + '\')">编辑</a> ';  //row.id为每行的id
-                    return e;
-                }
             }
+{#            ,{#}
+{#                title: '操作',#}
+{#                field: 'ip',#}
+{#                align: 'center',#}
+{#                formatter: function (value, row, index) {#}
+{#                    var e = '<a href="#" mce_href="#" onclick="edit(\'' + row.ip + '\')">编辑</a> ';  //row.id为每行的id#}
+{#                    return e;#}
+{#                }#}
+{#            }#}
             ]
         });
     })

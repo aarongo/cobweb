@@ -89,7 +89,12 @@ def assets_info(request):
 def add_data(request):
     ip_address = str(request.GET.get('ip_address'))
     group = request.GET.get('group')
-    inset_data = mysql_handle.insert_host(ip_address, group)
+    supervisor_exit = request.GET.get('supervisor')
+    if not supervisor_exit:
+        supervisor_exit = 0
+    inset_data = mysql_handle.insert_host(ip_address, group, supervisor_exit)
+    ip = mysql_handle.supervisor_address()
+    print ip
     print inset_data
     return HttpResponse("sfasdf")
 
