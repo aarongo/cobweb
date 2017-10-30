@@ -6,9 +6,13 @@
 import xmlrpclib
 import mysql_handle
 
-class control(object):
-    ip_address = mysql_handle.supervisor_address()
 
+def supervisor_address():
+    address = mysql_handle.supervisor_address()
+    return address
+
+
+class control(object):
     def __init__(self, hostname=None, pid=None, custom_result=None):
         # 所有的实例都共享此变量，即不单独为每个实例分配
         if custom_result is None:
@@ -21,7 +25,7 @@ class control(object):
 
     # 根据前端传过来的主机名进行实例化连接 supervisorAPI
     def supervisor_base(self):
-        supervisor_url = 'http://user:123@%s:9001' % control.ip_address[self.hostname]
+        supervisor_url = 'http://user:123@%s:9001' % supervisor_address()[self.hostname]
         connect_server = xmlrpclib.Server(supervisor_url)
         return connect_server
 
@@ -35,10 +39,11 @@ class control(object):
     1. 获取进程所有信息---并且处理所需数据使用 dict(ipaddress)
     2. 将数据通过 view 方法返回给前端返回 json 数据
     '''
+
     def supervisor_information(self):
         result_list = []
         number = 0
-        for hostname in control.ip_address:
+        for hostname in supervisor_address():
             server = control(hostname=hostname).supervisor_base()
             supervisor_process_info = server.supervisor.getAllProcessInfo()
             if len(supervisor_process_info) > 1:
@@ -46,14 +51,14 @@ class control(object):
                     process_name = supervisor_process_info[num]['name']
                     result_1 = server.supervisor.getProcessInfo(process_name)
                     result_1['hostname'] = hostname
-                    result_1['ipaddress'] = control.ip_address[hostname]
+                    result_1['ipaddress'] = supervisor_address()[hostname]
                     number += 1
                     result_list.append(result_1)
             else:
                 process_name = supervisor_process_info[0]['name']
                 result_1 = server.supervisor.getProcessInfo(process_name)
                 result_1['hostname'] = hostname
-                result_1['ipaddress'] = control.ip_address[hostname]
+                result_1['ipaddress'] = supervisor_address()[hostname]
                 number += 1
                 result_list.append(result_1)
         restful = {'code': 0, 'msg': 'okm', 'data': result_list, 'count': number}
@@ -108,9 +113,3 @@ class control(object):
         if result:
             self.custom_result = {'status': '重启成功'}
         return self.custom_result
-
-
-
-
-
-
