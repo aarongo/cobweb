@@ -18,7 +18,7 @@
         </script>
         <script src="/static/layui/dist/layui.js"></script>
         <script>
-            layui.use(['layer', 'table','element'], function(){
+            layui.use(['layer', 'table','element','laypage'], function(){
                 var layer = layui.layer; //弹层
                 var table = layui.table;
                 var element = layui.element;
@@ -27,7 +27,6 @@
                   elem: '#table' //指定原始表格元素选择器（推荐id选择器）
                   ,height: 315 //容器高度
                   ,width: 998
-                  ,limits: [5,10,15,20]
                   ,even: true
                   ,size: 'sm'
                   ,cols: [[
@@ -38,10 +37,9 @@
                         {field: 'statename', title: '运行状态', width:100},
                         {width:200, align:'center', toolbar: '#barDemo'}
                     ]] //设置表头
-                    ,page: true,
+                    ,
                     url:'supervisor_json'
 
-                  //,…… //更多参数参考右侧目录：基本参数选项
                 });
                 //监听工具条
                 table.on('tool(table_filter)', function(obj){ //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"

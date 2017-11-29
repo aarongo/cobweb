@@ -1,0 +1,55 @@
+#用户名
+uname="$1"
+#密码
+passwd="$2"
+
+#执行检测并安装expect模块
+ep=`rpm -qa | grep expect`
+
+if [ -z $ep   ] ; then
+ echo "检测到你的系统，没有安装expect模块，准备执行安装"
+ sleep 2
+ yum install -y expect
+
+else
+ echo "已经安装expect模块，3秒后，开始执行ssh文件同步"
+ sleep 3
+fi
+
+
+
+#公钥无ssh认证模块
+cat hosts | while read host
+do
+
+
+
+echo "当前正在向$host上传输ssh文件"
+expect <<EOF
+spawn  scp -r .ssh/  $host:/$uname
+expect {
+"*yes/no" {send "yes\r" ;exp_continue}
+"*password:" {send "$passwd\r" ;exp_continue  }
+}
+EOF
+
+
+
+
+
+echo "当前正在$host上进行公钥认证....."
+sleep 2
+expect <<EOF
+spawn  ssh-copy-id  -i .ssh/id_rsa.pub $host
+expect {
+"*yes/no" {send "yes\r" ;exp_continue}
+"*password:" {send "$passwd\r" ;exp_continue  }
+}
+
+
+EOF
+
+echo "认证成功...."
+
+done
+
